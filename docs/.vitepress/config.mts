@@ -25,7 +25,7 @@ const nav = folders.map((folder) => {
   Object.assign(sidebar, {[`/${folder}/`]: items.map((item) => ({ ...item, link: `/${folder}${item.link}` }))});
   return { text: folder, link: defaultRoute, activeMatch: defaultRoute }
 })
-console.log(sidebar);
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh-CN',
