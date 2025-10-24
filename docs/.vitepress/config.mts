@@ -22,10 +22,10 @@ const nav = folders.map((folder) => {
       sortFolderTo: 'bottom'
   }) as SidebarItem[]
   const defaultRoute = `/${folder}${items[0]?.link || ''}`;
-  Object.assign(sidebar, {[`/${folder}/`]: items.map((item) => ({ ...item, link: `${folder}${item.link}` }))});
-  return { text: _.capitalize(folder), link: defaultRoute, activeMatch: defaultRoute }
+  Object.assign(sidebar, {[`/${folder}/`]: items.map((item) => ({ ...item, link: `/${folder}${item.link}` }))});
+  return { text: folder, link: defaultRoute, activeMatch: defaultRoute }
 })
-
+console.log(sidebar);
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh-CN',
@@ -48,7 +48,7 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/wwELi/blog' }
     ],
-        outlineTitle: '本页内容', // 页面大纲标题
+    outlineTitle: '本页内容', // 页面大纲标题
     lastUpdated: {
       text: '最后更新于',
     },
