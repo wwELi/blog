@@ -1,6 +1,8 @@
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 on: [push]
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
