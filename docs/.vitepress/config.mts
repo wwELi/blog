@@ -1,5 +1,30 @@
 import { defineConfig } from 'vitepress'
 import { generateSidebar } from 'vitepress-sidebar'
+import fs, { link } from 'node:fs';
+import path from 'node:path';
+import { SidebarItem } from 'vitepress-sidebar/types';
+import _ from 'lodash'
+
+const excludeFolders = ['.vitepress', 'public'];
+const currentDir = path.join(process.cwd(), 'docs');
+const files = fs.readdirSync(currentDir);
+const folders = files.filter(filename => !excludeFolders.includes(filename) && fs.statSync(path.join(currentDir, filename)).isDirectory());
+
+const sidebar = {};
+const nav = folders.map((folder) => {
+  const items = generateSidebar({
+      documentRootPath: `docs/${folder}`, // 根目录
+      scanStartPath: '',        // 从根开始
+      basePath: '',            // 生成链接的基础路径
+      useTitleFromFileHeading: true, // 从 Markdown 一级标题读取标题
+      collapsed: true,          // ✅ 初始折叠状态（可改为 false 展开）
+      sortMenusByFrontmatterOrder: true,
+      sortFolderTo: 'bottom'
+  }) as SidebarItem[]
+  const defaultRoute = `/${folder}${items[0]?.link || ''}`;
+  Object.assign(sidebar, {[`/${folder}/`]: items.map((item) => ({ ...item, link: `${folder}${item.link}` }))});
+  return { text: _.capitalize(folder), link: defaultRoute, activeMatch: defaultRoute }
+})
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -18,20 +43,8 @@ export default defineConfig({
       provider: 'local'
     },
     // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: '主页', link: '/' },
-      { text: '文章', link: '/git_config_ssh.md' }
-    ],
-    sidebar: generateSidebar({
-      documentRootPath: 'docs', // 根目录
-      scanStartPath: '',        // 从根开始
-      basePath: '/',            // 生成链接的基础路径
-      useTitleFromFileHeading: true, // 从 Markdown 一级标题读取标题
-      collapsed: true,          // ✅ 初始折叠状态（可改为 false 展开）
-      sortMenusByFrontmatterOrder: true,
-      excludeByGlobPattern: ['index.md'], // 排除首页
-      sortFolderTo: 'bottom'
-     }),
+    nav: [{ text: '主页', link: '/' }, ...nav ],
+    sidebar,
     socialLinks: [
       { icon: 'github', link: 'https://github.com/wwELi/blog' }
     ],

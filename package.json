@@ -13,6 +13,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.9.1",
+    "lodash": "^4.17.21",
     "vitepress": "^1.6.4",
     "vitepress-sidebar": "^1.33.0"
   }
