@@ -4,6 +4,7 @@ import { generateSidebar } from 'vitepress-sidebar'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "My Awesome Project",
+  base: '/blog/',
   description: "A VitePress Site",
   outDir: '../dist',
   themeConfig: {
