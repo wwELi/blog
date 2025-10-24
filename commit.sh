@@ -20,6 +20,6 @@ git commit -m ":art: $commit_msg"
 
 # 6. 推送
 current_branch=$(git branch --show-current)
-# git push origin "$current_branch"
+git push origin "$current_branch"
 
 echo "✅ 提交完成: $commit_msg"
