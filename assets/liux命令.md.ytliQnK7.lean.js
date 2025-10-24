@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as s,ae as i}from"./chunks/framework.BKNbpbHR.js";const u=JSON.parse('{"title":"xargs","description":"","frontmatter":{},"headers":[],"relativePath":"liux命令.md","filePath":"liux命令.md"}'),r={name:"liux命令.md"};function l(o,a,n,c,d,p){return s(),t("div",null,[...a[0]||(a[0]=[i("",6)])])}const _=e(r,[["render",l]]);export{u as __pageData,_ as default};
