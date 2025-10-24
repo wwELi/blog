@@ -9,10 +9,13 @@ export default defineConfig({
   description: "西红柿红烧肉的博客",
   outDir: '../dist',
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '主页', link: '/' },
-      { text: '文章', link: '/liux命令.md' }
+      { text: '文章', link: '/git_config_ssh.md' }
     ],
     sidebar: generateSidebar({
       documentRootPath: 'docs', // 根目录
@@ -22,6 +25,7 @@ export default defineConfig({
       collapsed: true,          // ✅ 初始折叠状态（可改为 false 展开）
       sortMenusByFrontmatterOrder: true,
       excludeByGlobPattern: ['index.md'], // 排除首页
+      sortFolderTo: 'bottom'
      }),
     socialLinks: [
       { icon: 'github', link: 'https://github.com/wwELi/blog' }
