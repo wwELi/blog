@@ -4,12 +4,16 @@ import { generateSidebar } from 'vitepress-sidebar'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh-CN',
-  title: "西红柿红烧肉的博客",
+  title: "技术随笔",
   base: '/blog/',
   description: "西红柿红烧肉的博客",
   outDir: '../dist',
   ignoreDeadLinks: 'localhostLinks',
+  markdown: {
+    lineNumbers: true
+  },
   themeConfig: {
+    logo: '/logo.png',
     search: {
       provider: 'local'
     },
