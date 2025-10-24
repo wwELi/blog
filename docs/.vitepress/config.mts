@@ -8,6 +8,7 @@ export default defineConfig({
   base: '/blog/',
   description: "西红柿红烧肉的博客",
   outDir: '../dist',
+  ignoreDeadLinks: 'localhostLinks',
   themeConfig: {
     search: {
       provider: 'local'
