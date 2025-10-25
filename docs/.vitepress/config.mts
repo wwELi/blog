@@ -23,7 +23,7 @@ const nav = folders.map((folder) => {
   }) as SidebarItem[]
   const defaultRoute = `/${folder}${items[0]?.link || ''}`;
   Object.assign(sidebar, {[`/${folder}/`]: items.map((item) => ({ ...item, link: `/${folder}${item.link}` }))});
-  return { text: folder, link: defaultRoute, activeMatch: defaultRoute }
+  return { text: _.capitalize(folder), link: defaultRoute, activeMatch: defaultRoute }
 })
 
 // https://vitepress.dev/reference/site-config
