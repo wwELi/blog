@@ -10,6 +10,15 @@ const currentDir = path.join(process.cwd(), 'docs');
 const files = fs.readdirSync(currentDir);
 const folders = files.filter(filename => !excludeFolders.includes(filename) && fs.statSync(path.join(currentDir, filename)).isDirectory());
 
+const formatSidebars = (sidebarItem: SidebarItem, folderName: string): SidebarItem => {
+  const link = sidebarItem.link ? `/${folderName}${sidebarItem.link}` : undefined;
+  const items = Array.isArray(sidebarItem.items) && sidebarItem.items.length > 0
+    ? sidebarItem!.items.map((item) => formatSidebars(item, folderName))
+    : undefined;
+
+  return { ...sidebarItem, link, items }
+}
+
 const sidebar = {};
 const nav = folders.map((folder) => {
   const items = generateSidebar({
@@ -22,9 +31,16 @@ const nav = folders.map((folder) => {
       sortFolderTo: 'bottom'
   }) as SidebarItem[]
   const defaultRoute = `/${folder}${items[0]?.link || ''}`;
-  Object.assign(sidebar, {[`/${folder}/`]: items.map((item) => ({ ...item, link: `/${folder}${item.link}` }))});
+
+  const routes = items.map((item) => formatSidebars(item, folder));
+
+  Object.assign(sidebar, {[`/${folder}/`]: routes });
+
   return { text: _.capitalize(folder), link: defaultRoute, activeMatch: defaultRoute }
 })
+
+
+console.log('Generated sidebar:', JSON.stringify(sidebar, null, 2));
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
