@@ -8,7 +8,7 @@ xcode:  查看lib 找到对应的lib  build setting ->  paths -> Header search p
 
 ## 部分引入的lib 不支持arm 64
 ::: warning build 出现以下错误
-Building for 'iOS-simulator', but linking in object file (/Users/wei.wang/Library/Developer/Xcode/DerivedData/OTRASTabletApp-ffxyfmpropogarcxlgenjxycruvc/Build/Products/Debug-iphonesimulator/libRNScanner.a[9](IDCardCoreProject.o)) built for 'iOS'
+Building for 'iOS-simulator', but linking in object file (/Users/wei.wang/Library/Developer/Xcode/DerivedData/OTRASTabletApp-ffxyfmpropogarcxlgenjxycruvc/Build/Products/Debug-iphonesimulator/libRNScanner.a[9] (IDCardCoreProject.o)) built for 'iOS'
 :::
 ```解决```
 build setting -> Architectures -> Excluded Architectures -> 选择 any ios or iOS-simulator SDK 值输入为arm64, 这样在选择simulator 就会多 rosetta 版本（Rosetta  是 macOS 上的 “翻译器”，它能让 Intel 架构的程序 在 ARM 芯片（Apple Silicon） 上运行）
