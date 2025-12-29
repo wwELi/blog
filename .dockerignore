@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore
+
+# 编辑器/IDE 相关
+.vscode
+.idea
+
