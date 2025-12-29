@@ -45,5 +45,15 @@ jobs:
           tags: |
             crpi-xl3t7d13ry0xdv7c.cn-beijing.personal.cr.aliyuncs.com/ww_images/blog:latest
             crpi-xl3t7d13ry0xdv7c.cn-beijing.personal.cr.aliyuncs.com/ww_images/blog:${{ github.sha }}
-
-
+      
+      - name: Deploy to ECS via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.ECS_HOST }}
+          username: ${{ secrets.ECS_USER }}
+          key: ${{ secrets.ECS_SSH_KEY }}
+          script: |
+            docker login crpi-xl3t7d13ry0xdv7c.cn-beijing.personal.cr.aliyuncs.com -u '${{ secrets.ALIYUN_CR_USERNAME }}' -p '${{ secrets.ALIYUN_CR_PASSWORD }}'
+            docker pull crpi-xl3t7d13ry0xdv7c.cn-beijing.personal.cr.aliyuncs.com/ww_images/blog:latest
+            docker rm -f blog || true
+            docker run -d --name blog -p 80:80 crpi-xl3t7d13ry0xdv7c.cn-beijing.personal.cr.aliyuncs.com/ww_images/blog:latest
