@@ -1,14 +1,17 @@
 <template>
   <div class="custom-card">
     <button @click="fetchData">Huo qu</button>
+    {{ jsontext }}
   </div>
 </template>
 
 <script setup>
   function fetchData() {
-    fetch('http://39.107.213.48:8080')
+    let jsontext = ''
+    fetch('/api')
       .then(response => response.json())
       .then(data => {
+        jsontext = JSON.stringify(data, null, 2);
         console.log(data);
       })
       .catch(error => {
