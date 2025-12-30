@@ -44,7 +44,6 @@ jobs:
           push: true
           tags: |
             crpi-xl3t7d13ry0xdv7c.cn-beijing.personal.cr.aliyuncs.com/ww_images/blog:latest
-            crpi-xl3t7d13ry0xdv7c.cn-beijing.personal.cr.aliyuncs.com/ww_images/blog:${{ github.sha }}
       
       - name: Deploy to ECS via SSH
         uses: appleboy/ssh-action@v1.2.0
