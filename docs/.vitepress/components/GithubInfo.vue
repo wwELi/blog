@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
+  let jsontext = '';
   function fetchData() {
-    let jsontext = ''
     fetch('/api')
       .then(response => response.json())
       .then(data => {
